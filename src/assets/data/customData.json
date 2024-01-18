@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "Javascript For Beginner",
+    "author": " xyz",
+    "price": 62,
+    "year": "2000",
+    "favourite": true
+  },
+  {
+    "id": 2,
+    "name": "Javascript For Intermediate",
+    "author": " xyz",
+    "price": 62,
+    "year": "2010",
+    "favourite": false
+  },
+  {
+    "id": 3,
+    "name": "Javascript For Expert",
+    "author": " xyz",
+    "price": 62,
+    "year": "2012",
+    "favourite": true
+  },
+  {
+    "id": 4,
+    "name": "Python For Intermediate",
+    "author": " xyz",
+    "price": 62,
+    "year": "2010",
+    "favourite": true
+  },
+  {
+    "id": 5,
+    "name": "Javascript For Beginner",
+    "author": " xyz",
+    "price": 62,
+    "year": "2000",
+    "favourite": false
+  },
+  {
+    "id": 6,
+    "name": "Python For Expert",
+    "author": " xyz",
+    "price": 62,
+    "year": "2016",
+    "favourite": false
+  },
+  {
+    "id": 7,
+    "name": "Python For Web Development",
+    "author": " xyz",
+    "price": 62,
+    "year": "2010",
+    "favourite": false
+  },
+  {
+    "id": 8,
+    "name": "Javascript For Web Development",
+    "author": " xyz",
+    "price": 62,
+    "year": "2011",
+    "favourite": true
+  },
+  {
+    "id": 9,
+    "name": "Art in Javascript",
+    "author": " xyz",
+    "price": 62,
+    "year": "2020",
+    "favourite": false
+  },
+  {
+    "id": 10,
+    "name": "Data Science with Python",
+    "author": " xyz",
+    "price": 62,
+    "year": "2023",
+    "favourite": true
+  },
+  {
+    "id": 11,
+    "name": "History of JS",
+    "author": " xyz",
+    "price": 62,
+    "year": "2013",
+    "favourite": false
+  },
+  {
+    "id": 12,
+    "name": "Javascript Master",
+    "author": " xyz",
+    "price": 62,
+    "year": "2015",
+    "favourite": false
+  },
+  {
+    "id": 13,
+    "name": "HTML and CSS",
+    "author": " xyz",
+    "price": 62,
+    "year": "2010",
+    "favourite": true
+  },
+  {
+    "id": 14,
+    "name": "Figma Art",
+    "author": " xyz",
+    "price": 62,
+    "year": "2000",
+    "favourite": false
+  },
+  {
+    "id": 15,
+    "name": "App Development",
+    "author": " xyz",
+    "price": 62,
+    "year": "2009",
+    "favourite": true
+  },
+  {
+    "id": 16,
+    "name": "A-Z Flutter Development ",
+    "author": " xyz",
+    "price": 62,
+    "year": "2020",
+    "favourite": false
+  },
+  {
+    "id": 17,
+    "name": "Javascript For Intermediate",
+    "author": " xyz",
+    "price": 62,
+    "year": "2023",
+    "favourite": false
+  },
+  {
+    "id": 18,
+    "name": "Code For Everyone",
+    "author": " xyz",
+    "price": 62,
+    "year": "1999",
+    "favourite": false
+  },
+  {
+    "id": 19,
+    "name": "How to write code",
+    "author": " xyz",
+    "price": 62,
+    "year": "1998",
+    "favourite": false
+  },
+  {
+    "id": 20,
+    "name": "Artificial Inteligence",
+    "author": " xyz",
+    "price": 62,
+    "year": "1990",
+    "favourite": false
+  }
+]
