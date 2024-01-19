@@ -6,30 +6,89 @@ import ratingImage from "../assets/images/star.svg";
 export default function MainContent() {
   const mainData = originalData;
   const [filteredData, setFilteredData] = useState(mainData);
-
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [sortType, setSortType] = useState("");
 
   const searchFunction = (searchKeyword) => {
-    console.log(searchKeyword);
+    // console.log(searchKeyword);
     const newFilteredData = mainData.filter((item) =>
-      item.name.toLocaleLowerCase().includes(searchKeyword)
+      item.name.toLowerCase().includes(searchKeyword.toLowerCase())
     );
     setFilteredData(newFilteredData);
   };
 
   const handleSorting = (value) => {
-    console.log(value);
+    const newFilteredData = [...filteredData];
     if (value === "name_asc") {
-      console.log(value);
+      newFilteredData.sort((a, b) => {
+        const nameA = a.name.toLowerCase(); // ignore upper and lowercase
+        const nameB = b.name.toLowerCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+      setFilteredData(newFilteredData);
     } else if (value === "name_desc") {
-      console.log(value);
+      newFilteredData.sort((a, b) => {
+        const nameA = a.name.toLowerCase(); // ignore upper and lowercase
+        const nameB = b.name.toLowerCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return 1;
+        }
+        if (nameA > nameB) {
+          return -1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+      setFilteredData(newFilteredData);
     } else if (value === "year_asc") {
-      console.log(value);
+      newFilteredData.sort((a, b) => {
+        const nameA = a.year.toLowerCase(); // ignore upper and lowercase
+        const nameB = b.year.toLowerCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+      setFilteredData(newFilteredData);
     } else {
-      console.log(value);
+      newFilteredData.sort((a, b) => {
+        const nameA = a.year.toLowerCase(); // ignore upper and lowercase
+        const nameB = b.year.toLowerCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return 1;
+        }
+        if (nameA > nameB) {
+          return -1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+      setFilteredData(newFilteredData);
     }
   };
-
+  const handleFavourite = (value1, value2) => {
+    for (let i = 0; i < mainData.length; i++) {
+      if (mainData[i].id === value1) {
+        mainData[i].favourite = !value2;
+      }
+    }
+    searchFunction(searchKeyword);
+  };
   return (
     <main className="my-10 lg:my-14">
       <BodyHeader
@@ -37,11 +96,16 @@ export default function MainContent() {
         setSortType={setSortType}
         sortType={sortType}
         searchFunction={searchFunction}
+        setSearchKeyword={setSearchKeyword}
       />
 
       <div className="container mx-auto grid grid-cols-1 gap-8 max-w-7xl md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredData.map((item) => (
-          <BookItem key={item.id} data={item} />
+          <BookItem
+            key={item.id}
+            data={item}
+            handleFavourite={handleFavourite}
+          />
         ))}
       </div>
     </main>
@@ -51,6 +115,7 @@ export default function MainContent() {
 const BodyHeader = ({
   sortType,
   setSortType,
+  setSearchKeyword,
   handleSorting,
   searchFunction,
 }) => {
@@ -60,6 +125,7 @@ const BodyHeader = ({
     handleSorting(e.target.value);
   };
   const handleSearchButton = () => {
+    setSearchKeyword(inputData);
     searchFunction(inputData);
   };
   return (
@@ -136,7 +202,7 @@ const BodyHeader = ({
   );
 };
 
-const BookItem = ({ data }) => {
+const BookItem = ({ data, handleFavourite }) => {
   return (
     <div className="space-y-3">
       {/* <!-- thumbnail --> */}
@@ -181,25 +247,10 @@ const BookItem = ({ data }) => {
             Add to Cart
           </button>
           {data?.favourite ? (
-            <button className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#1C4336]/[14%] py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                />
-              </svg>
-              Favourite
-            </button>
-          ) : (
-            <button className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#DC2954]/[14%] py-1.5 text-[#DC2954] transition-all hover:bg-[#DC2954]/[24%] lg:py-1.5">
+            <button
+              className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#DC2954]/[14%] py-1.5 text-[#DC2954] transition-all hover:bg-[#DC2954]/[24%] lg:py-1.5"
+              onClick={() => handleFavourite(data?.id, data?.favourite)}
+            >
               <svg
                 width="16"
                 height="14"
@@ -217,6 +268,27 @@ const BookItem = ({ data }) => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                />
+              </svg>
+              Favourite
+            </button>
+          ) : (
+            <button
+              className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#1C4336]/[14%] py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5"
+              onClick={() => handleFavourite(data?.id, data?.favourite)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-5 w-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                 />
               </svg>
               Favourite
