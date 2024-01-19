@@ -4,17 +4,17 @@ import bookImage from "../assets/images/book.png";
 import ratingImage from "../assets/images/star.svg";
 
 export default function MainContent() {
-  const mainData = originalData;
+  const [mainData, setMainData] = useState(originalData);
   const [filteredData, setFilteredData] = useState(mainData);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortType, setSortType] = useState("");
 
   const searchFunction = (searchKeyword) => {
-    // console.log(searchKeyword);
     const newFilteredData = mainData.filter((item) =>
       item.name.toLowerCase().includes(searchKeyword.toLowerCase())
     );
     setFilteredData(newFilteredData);
+    setSortType("");
   };
 
   const handleSorting = (value) => {
@@ -82,12 +82,14 @@ export default function MainContent() {
     }
   };
   const handleFavourite = (value1, value2) => {
-    for (let i = 0; i < mainData.length; i++) {
-      if (mainData[i].id === value1) {
-        mainData[i].favourite = !value2;
+    const mainData2 = [...mainData];
+    for (let i = 0; i < mainData2.length; i++) {
+      if (mainData2[i].id === value1) {
+        mainData2[i].favourite = !value2;
       }
     }
-    searchFunction(searchKeyword);
+    setMainData(mainData2);
+    // searchFunction(searchKeyword);
   };
   return (
     <main className="my-10 lg:my-14">
